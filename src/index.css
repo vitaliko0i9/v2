@@ -1,0 +1,210 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.Header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  font-size: 10vw;
+  color: white;
+}
+
+body {
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  max-width: auto;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing:border-box;
+}
+/*
+.BodyBackground {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  max-width: auto;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing:border-box;
+}
+*/
+.bg-video {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover; 
+  z-index: -1; 
+  pointer-events: none; 
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+/* Контейнер для пошуку (колишній .search) */
+.name {
+  display: inline-flex;
+  align-items: center;
+  background-color: #f1f1f1;
+  border-radius: 50px;
+  padding: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+
+/* Іконка пошуку */
+.search-icon {
+  padding: 6px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Інпут у початковому стані */
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 0px;
+  height: 38px;
+  padding: 0px;
+  opacity: 0;
+  transition: width 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.4s;
+}
+
+/* --- ТВІЙ КОД ДЛЯ КОМП'ЮТЕРІВ (ЗАЛИШАЄТЬСЯ ЯК БУВ) --- */
+@media (hover: hover) {
+    /* Інпут розгортається ТІЛЬКИ при наведенні курсора */
+    .search-input:hover {
+        width: 30vw;
+    }
+}
+
+/* --- МОБІЛЬНИЙ МЕДІА-ЗАПИТ (ВИПРАВЛЯЄМО ДЛЯ ТЕЛЕФОНІВ) --- */
+@media (hover: none) {
+    /* 1. Базове розгортання при фокусі на телефоні */
+    .search-input:focus {
+        width: 40vw !important; /* Ставимо чітко 40% екрана телефона */
+    }
+    
+    /* 2. Якщо розгортання зав'язане на класи .name або .active на телефоні */
+    .name:hover .search-input,
+    .name.active .search-input {
+        width: 40vw !important; /* Теж строго 40% екрана телефона */
+        opacity: 1;
+        padding: 0 10px;
+    }
+}
+
+/* --- ТВІЙ БАЗОВІЙ ЕФЕКТ ВИПОВЗАННЯ (ОСНОВНИЙ БЛОК) --- */
+.name:hover .search-input,
+.search-input:focus,
+.name.active .search-input {
+    width: 15vw; /* Це правило тепер працюватиме ТІЛЬКИ на ПК, бо мобільні його переб'ють */
+    opacity: 1;
+    padding: 0 10px;
+}
+
+.ResultChild {
+  width: min(320px, 85vw);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-6px);
+  pointer-events: none;
+  background: rgba(20, 20, 20, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition:
+    max-height 0.35s ease,
+    opacity 0.3s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.Searchbar:focus-within + .ResultChild,
+.Searchbar:has(.search-input:not(:placeholder-shown)) + .ResultChild {
+  max-height: 280px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.ResultChild ul {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+}
+
+.ResultChild li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  transition: background-color 0.2s ease;
+}
+
+.ResultChild li:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.track-image {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.track-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.track-info strong {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-info span {
+  color: #aaa;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.play-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.play-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
