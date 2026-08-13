@@ -47,7 +47,7 @@ body {
   background-size: cover;
   background-position: center;
 }
-/* Контейнер для пошуку (колишній .search) */
+
 .name {
   display: inline-flex;
   align-items: center;
@@ -59,7 +59,6 @@ body {
   transition: all 0.4s ease-in-out;
 }
 
-/* Іконка пошуку */
 .search-icon {
   padding: 6px;
   user-select: none;
@@ -68,7 +67,6 @@ body {
   justify-content: center;
 }
 
-/* Інпут у початковому стані */
 .search-input {
   border: none;
   outline: none;
@@ -80,35 +78,28 @@ body {
   transition: width 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.4s;
 }
 
-/* --- ТВІЙ КОД ДЛЯ КОМП'ЮТЕРІВ (ЗАЛИШАЄТЬСЯ ЯК БУВ) --- */
 @media (hover: hover) {
-    /* Інпут розгортається ТІЛЬКИ при наведенні курсора */
     .search-input:hover {
         width: 30vw;
     }
 }
 
-/* --- МОБІЛЬНИЙ МЕДІА-ЗАПИТ (ВИПРАВЛЯЄМО ДЛЯ ТЕЛЕФОНІВ) --- */
 @media (hover: none) {
-    /* 1. Базове розгортання при фокусі на телефоні */
     .search-input:focus {
-        width: 40vw !important; /* Ставимо чітко 40% екрана телефона */
+        width: 40vw !important;
     }
-    
-    /* 2. Якщо розгортання зав'язане на класи .name або .active на телефоні */
     .name:hover .search-input,
     .name.active .search-input {
-        width: 40vw !important; /* Теж строго 40% екрана телефона */
+        width: 40vw !important; 
         opacity: 1;
         padding: 0 10px;
     }
 }
 
-/* --- ТВІЙ БАЗОВІЙ ЕФЕКТ ВИПОВЗАННЯ (ОСНОВНИЙ БЛОК) --- */
 .name:hover .search-input,
 .search-input:focus,
 .name.active .search-input {
-    width: 15vw; /* Це правило тепер працюватиме ТІЛЬКИ на ПК, бо мобільні його переб'ють */
+    width: 15vw; 
     opacity: 1;
     padding: 0 10px;
 }
@@ -207,4 +198,16 @@ body {
 
 .play-btn:hover {
   background: rgba(255, 255, 255, 0.28);
+}
+
+.album-wall {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.album-wall img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
 }
