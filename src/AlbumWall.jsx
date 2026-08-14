@@ -18,40 +18,45 @@ function AlbumWall() {
             setAlbums(AllAlbums)
         };
         getAlbums()
-    }, [])
-
-    
-    return(
-    <div className="album-wall">
-        {albums.map(album =>
-        <a
-            className="album"
-            href={album.collectionViewUrl}
-            key={album.collectionId}
-            target="_blank"
-        >
-        <img
-            key={album.collectionId}
-            src={album.artworkUrl100}
-            alt={album.collectionName}
-        />
-        </a>
-        )}
-    </div>
+    }, []);
+ 
+    return (
+        <div className="album-wall">
+            {albums.map(album => {
+                const size = Math.floor(Math.random() * 150) + 100;
+                return (
+                    <a
+                        className="falling-album"
+                        href={album.collectionViewUrl}
+                        key={album.collectionId}
+                        target="_blank"
+                        style={{
+                            width: `${size}px`,
+                            height: `${size}px`,
+                        }}
+                    >
+                        <img
+                            src={album.artworkUrl100.replace("100x100", "600x600")}
+                            alt={album.collectionName}
+                        />
+                    </a>
+                );
+            })}
+        </div>
     );
 }
-
-const artists = [
-    "Kendrick Lamar",
-    "Drake",
-    "The Weeknd",
-    "Tyler the Creator",
-    "Frank Ocean",
-    "Taylor Swift",
-    "Adele",
-    "Travis Scott",
-    "Billie Eilish",
-    "Kanye West"
-];
+    const artists = [
+        "Kendrick Lamar",
+        "Drake",
+        "The Weeknd",
+        "Tyler the Creator",
+        "Taylor Swift",
+        "Frank Ocean",
+        "Travis Scott",
+        "Billie Eilish",
+        "Adele",
+        "Kanye West",
+        "Playboi Carti"
+    ];
 
 export default AlbumWall;

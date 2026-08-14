@@ -201,13 +201,40 @@ body {
 }
 
 .album-wall {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: black;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    align-items: start;
 }
 
-.album-wall img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
+.falling-album {
+    display: block;
+
+    animation: fall 10s linear infinite;
+
+    align-self: start;
+    justify-self: start;
+}
+
+.falling-album img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    display: block;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(-100vh);
+    }
+
+    to {
+        transform: translateY(100vh);
+    }
 }
