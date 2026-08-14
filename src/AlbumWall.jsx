@@ -23,7 +23,7 @@ function AlbumWall() {
     return (
         <div className="album-wall">
             {albums.map(album => {
-                const size = Math.floor(Math.random() * 150) + 100;
+                const size = Math.floor(Math.random() * 155) + 100;
                 return (
                     <a
                         className="falling-album"
