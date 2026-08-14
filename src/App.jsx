@@ -6,7 +6,6 @@ function App() {
 
   return(
     <>
-    <AlbumWall />
     <Header></Header>
     <Body></Body>
     </>
