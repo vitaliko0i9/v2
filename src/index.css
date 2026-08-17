@@ -9,9 +9,20 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  padding-top: 24px;
   font-size: 10vw;
   color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85);
+}
+
+h1.Header {
+  height: auto;
+  line-height: 1;
 }
 
 body {
@@ -19,10 +30,15 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  max-width: auto;
-  min-height: 100vh;
   width: 100%;
+  height: 100vh;
+  overflow: hidden;
   box-sizing:border-box;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
 }
 /*
 .BodyBackground {
@@ -34,7 +50,7 @@ body {
   width: 100%;
   box-sizing:border-box;
 }
-*/
+
 .bg-video {
   position: fixed;
   width: 100vw;
@@ -47,7 +63,7 @@ body {
   background-size: cover;
   background-position: center;
 }
-
+*/
 .name {
   display: inline-flex;
   align-items: center;
@@ -200,40 +216,61 @@ body {
   background: rgba(255, 255, 255, 0.28);
 }
 
-.album-wall {
+.search-section {
+  position: relative;
+  z-index: 3;
+}
+
+.page-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.page-overlay .search-section {
+  pointer-events: auto;
+}
+
+.wall-container {
     width: 100vw;
     height: 100vh;
+    max-height: 100vh;
     overflow: hidden;
-    position: relative;
+    position: fixed;
+    inset: 0;
     background: black;
+    z-index: 0;
+}
 
+.album-wall {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    align-items: start;
+    gap: 8px;
+    padding: 8px;
+    animation: wall-scroll 60s linear infinite;
 }
 
 .falling-album {
     display: block;
-    animation: fall 10s linear infinite;
-
-    align-self: start;
-    justify-self: start;
+    aspect-ratio: 1;
 }
 
 .falling-album img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
 }
 
-@keyframes fall {
+@keyframes wall-scroll {
     from {
-        transform: translateY(-100vh);
+        transform: translateY(0);
     }
 
     to {
-        transform: translateY(100vh);
+        transform: translateY(-50%);
     }
 }

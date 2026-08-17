@@ -31,36 +31,23 @@ function AlbumWall() {
     // }, []);
     return (
         <div className="wall-container">
-    <div className="album-wall">
-        {albums.map((album, index) => (
-            <a
-                className="falling-album"
-                href={album.collectionViewUrl}
-                key={`${album.collectionId}-${index}`}
-            >
-                <img
-                    src={album.artworkUrl100.replace("100x100", "600x600")}
-                    alt={album.collectionName}
-                />
-            </a>
-        ))}
-    </div>
-
-    <div className="album-wall">
-        {albums.map((album, index) => (
-            <a
-                className="falling-album"
-                href={album.collectionViewUrl}
-                key={`second-${album.collectionId}-${index}`}
-            >
-                <img
-                    src={album.artworkUrl100.replace("100x100", "600x600")}
-                    alt={album.collectionName}
-                />
-            </a>
-        ))}
-    </div>
-</div>
+            <div className="album-wall">
+                {[...albums, ...albums].map((album, index) => (
+                    <a
+                        className="falling-album"
+                        href={album.collectionViewUrl}
+                        key={`${album.collectionId}-${index}`}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <img
+                            src={album.artworkUrl100.replace("100x100", "600x600")}
+                            alt={album.collectionName}
+                        />
+                    </a>
+                ))}
+            </div>
+        </div>
     )
 }
 export default AlbumWall;
