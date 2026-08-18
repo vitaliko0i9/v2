@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 function AlbumWall() {
-
     const [ albums, setAlbums ] = useState([]);
-
 
     useEffect(() => {
         const getAlbums = async () => {
@@ -29,25 +26,25 @@ function AlbumWall() {
     //     };
     //     getAlbums()
     // }, []);
+
     return (
         <div className="wall-container">
             <div className="album-wall">
-                {[...albums, ...albums].map((album, index) => (
-                    <a
-                        className="falling-album"
-                        href={album.collectionViewUrl}
-                        key={`${album.collectionId}-${index}`}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <img
-                            src={album.artworkUrl100.replace("100x100", "600x600")}
-                            alt={album.collectionName}
-                        />
-                    </a>
-                ))}
-            </div>
+            {[...albums, ...albums].map((album, index) => (
+                <a
+                    className="falling-album"
+                    href={album.collectionViewUrl}
+                    key={`${album.collectionId}-${index}`}
+                    target="_blank"
+                >
+                    <img
+                        src={album.artworkUrl100.replace("100x100", "600x600")}
+                        alt={album.collectionName}
+                    />
+                </a>
+            ))}
         </div>
+    </div>
     )
 }
 export default AlbumWall;
