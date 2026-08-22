@@ -11,8 +11,8 @@
   width: 100%;
   font-size: 10vw;
   color: white;
-  position: relative; 
-  top: 0;
+  position: absolute; 
+  top: 20%;
   left: 0;
   z-index: 2;
   pointer-events: none;
@@ -248,7 +248,7 @@ html {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 8px;
     padding: 8px;
-    animation: wall-scroll 60s linear infinite;
+    animation: wall-scroll 90s linear infinite;
 }
 
 .falling-album {

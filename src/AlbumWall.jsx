@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function AlbumWall() {
     const [ albums, setAlbums ] = useState([]);
@@ -31,17 +32,17 @@ function AlbumWall() {
         <div className="wall-container">
             <div className="album-wall">
             {[...albums, ...albums].map((album, index) => (
-                <a
+                <Link
                     className="falling-album"
-                    href={album.collectionViewUrl}
-                    key={`${album.collectionId}-${index}`}
+                    // href={album.collectionViewUrl}
+                    to={`/album/${album.collectionId}-${index}`}
                     target="_blank"
                 >
                     <img
                         src={album.artworkUrl100.replace("100x100", "600x600")}
                         alt={album.collectionName}
                     />
-                </a>
+                </Link>
             ))}
         </div>
     </div>
