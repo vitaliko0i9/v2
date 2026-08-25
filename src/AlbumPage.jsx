@@ -1,56 +1,40 @@
-import { useParams } from "react-router-dom";
+import { data, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { string } from "prop-types";
+
 
 function AlbumPage() {
-    const { id } = useParams();
 
-    const [album, setAlbum] = useState(null);
+    const { id } = useParams();
+    const [ albums, setAlbums] = useState(null);
 
     useEffect(() => {
         fetch("/src/albums.json")
-            .then(response => response.json())
-            .then(data => {
-                const foundAlbum = data.find(
-                    album => String(album.collectionId) === id
-                );
-
-                setAlbum(foundAlbum);
-            });
+        .then(response => response.json())
+        .then(data => {
+            const foundAlbum = data.find(
+                albums => String(albums.collectionId) === id
+            );
+            setAlbums(foundAlbum)
+        })
     }, [id]);
 
-    if (!album) {
-        return <h1>Album not found</h1>;
+    if(!albums){
+        return <h1>Album not found</h1>
     }
 
-    return (
-        <div className="album-page">
-
-            <img
-                src={album.artworkUrl100.replace(
-                    "100x100",
-                    "600x600"
-                )}
-                alt={album.collectionName}
-            />
-
-            <div>
-                <h1>{album.collectionName}</h1>
-
-                <h2>{album.artistName}</h2>
-
-                <p>{album.releaseDate}</p>
-
-                <a
-                    href={album.collectionViewUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    Open in iTunes
-                </a>
+    return(
+        <div>
+            <div className="album-preview">
+                <img
+                    src={albums.artworkUrl100.replace("100x100", "300x300")}
+                    alt={albums.collectionName}
+                    />
+                <h1>{albums.collectionName}</h1>
+                <h2>{albums.artistName}</h2>
             </div>
-
         </div>
-    );
+    )
 }
 
 export default AlbumPage;

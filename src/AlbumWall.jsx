@@ -31,16 +31,16 @@ function AlbumWall() {
     return (
         <div className="wall-container">
             <div className="album-wall">
-            {[...albums, ...albums].map((album, index) => (
+                {albums.map((album) => (
                 <Link
                     className="falling-album"
-                    // href={album.collectionViewUrl}
-                    to={`/album/${album.collectionId}-${index}`}
-                    target="_blank"
+                    href={album.collectionViewUrl}
+                    to={`/album/${album.collectionId}`}
+                    //target="_blank"
                 >
                     <img
                         src={album.artworkUrl100.replace("100x100", "600x600")}
-                        alt={album.collectionName}
+                       alt={album.collectionName}
                     />
                 </Link>
             ))}
