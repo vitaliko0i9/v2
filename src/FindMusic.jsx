@@ -43,7 +43,7 @@ function FindMusic() {
                     <li key={track.trackId}>
                         <img src={track.artworkUrl100}
                         className="track-image"
-                         alt={track.trackName}/>
+                        alt={track.trackName}/>
                         <div className="track-info"> 
                         <strong>{track.trackName}</strong>
                         <span>{track.artistName}</span>
