@@ -60,18 +60,18 @@ function AlbumPage() {
                 <h2>{albums.artistName}</h2>
             </div>
             <div className="track-info">
-                <ul>
-                {tracks.map((track) => (
-                    <li>
-                        <AudioPlayer
-                            //className={style.play-btn}
-                            src={track.previewUrl}
-                            isPlaying={currentTrackId === track.trackId}
-                            onPlayToggle={() => handlePlayToggle(track.trackId)}
-                        />
-                        <h2>{track.trackName}</h2>
-                    </li>
-                ))}
+                <ul style={{ gridTemplateRows: `repeat(${Math.ceil(tracks.length / 2)}, 1fr)` }}>
+                    {tracks.map((track) => (
+                        <li>
+                            <AudioPlayer
+                                // id={track.trackId}
+                                src={track.previewUrl}
+                                isPlaying={currentTrackId === track.trackId}
+                                onPlayToggle={() => handlePlayToggle(track.trackId)}
+                            />
+                            <h2>{track.trackName}</h2>
+                        </li>
+                    ))}
                 </ul>
             </div>
           </div>

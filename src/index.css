@@ -258,16 +258,13 @@ html {
   margin-top: 50vw;
 }
 
-.album-preview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .album-page-wrapper {
-    max-width: 480px;
-    margin: 60px auto;
-    padding: 32px 24px;
+    max-width: 780px;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 16px 32px;
+    box-sizing: border-box;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -276,6 +273,7 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 }
 
 .album-preview {
@@ -283,20 +281,24 @@ html {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-bottom: 24px;
+    flex-shrink: 0;
+    margin-bottom: 12px;
 }
 
 .album-preview img {
-    width: 240px;
-    height: 240px;
+    width: 18vh;
+    height: 18vh;
+    max-width: 160px;
+    max-height: 160px;
     object-fit: cover;
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .album-preview h1 {
-    margin: 16px 0 4px;
-    font-size: 1.5rem;
+    margin: 10px 0 2px;
+    font-size: 1.8rem;
+    font-weight: 700;
     color: rgba(0, 0, 0, 0.7);
 }
 
@@ -309,28 +311,38 @@ html {
 
 .track-info {
     width: 100%;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .track-info ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    height: 100%;
+
+    /* ключове — розкладка у дві колонки */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(9, 1fr); /* підлаштуйте під максимальну к-сть треків / 2 */
+    column-gap: 16px;
+    row-gap: 4px;
 }
 
 .track-info li {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 8px 12px;
-    border-radius: 12px;
+    gap: 8px;
+    padding: 4px 10px;
+    border-radius: 10px;
     background: rgba(255, 255, 255, 0.08);
     color: rgba(0, 0, 0, 0.7);
-    transition: background 0.2s ease;
-}
-
-.track-info li:hover {
-    background: rgba(255, 255, 255, 0.16);
+    font-size: 0.8rem;
+    font-weight: 400;
+    min-height: 0;
+    overflow: hidden;
+    /* white-space: nowrap;
+    text-overflow: ellipsis; */
 }
