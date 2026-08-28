@@ -6,6 +6,12 @@ function FindMusic() {
     const [name, setName] = useState('')
     const [music, setMusic] = useState([])
 
+    const [currentTrackId, setCurrentTrackId] = useState(null);
+
+    const handlePlayToggle = (trackId) => {
+    setCurrentTrackId(prev => (prev === trackId ? null : trackId));
+    };
+
     const getMusic = (e) => {
         axios.get(`https://itunes.apple.com/search?term=${name}&entity=song&origin=*`)
         .then((response) => {
@@ -48,7 +54,11 @@ function FindMusic() {
                         <strong>{track.trackName}</strong>
                         <span>{track.artistName}</span>
                         </div>
-                        <AudioPlayer src={track.previewUrl} />
+                        <AudioPlayer
+                        src={track.previewUrl}
+                        isPlaying={currentTrackId === track.trackId}
+                        onPlayToggle={() => handlePlayToggle(track.trackId)}
+                        />
                     </li>
                 ))}
             </ul>

@@ -1,15 +1,20 @@
 import { data, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { string } from "prop-types";
-import AudioPlayer from "./AudioPlayer";
 import axios from "axios";
+import AudioPlayer from "./AudioPlayer";
+
 
 function AlbumPage() {
 
     const { id } = useParams();
     const [ albums, setAlbums] = useState(null);
-
     const [ tracks, setTracks] = useState([]);
+
+    const [currentTrackId, setCurrentTrackId] = useState(null);
+
+    const handlePlayToggle = (trackId) => {
+    setCurrentTrackId(prev => (prev === trackId ? null : trackId));
+    };
 
     useEffect(() => {
         const getTracks = async () => {
@@ -21,8 +26,7 @@ function AlbumPage() {
                 const songs = response.data.results.filter(
                     item => item.wrapperType === "track"
                 );
-                console.log(songs[0].previewUrl);
-
+                setTracks(songs);
             } catch (error) {
                 console.log("Помилка в: ", error)
             }
@@ -46,7 +50,7 @@ function AlbumPage() {
     }
 
     return(
-        <div>
+        <div className="album-page-wrapper">
             <div className="album-preview">
                 <img
                     src={albums.artworkUrl100.replace("100x100", "300x300")}
@@ -55,12 +59,22 @@ function AlbumPage() {
                 <h1>{albums.collectionName}</h1>
                 <h2>{albums.artistName}</h2>
             </div>
-            <audio
-                src={tracks.previewUrl}
-                controls
-            />
+            <div className="track-info">
+                <ul>
+                {tracks.map((track) => (
+                    <li>
+                        <AudioPlayer
+                            //className={style.play-btn}
+                            src={track.previewUrl}
+                            isPlaying={currentTrackId === track.trackId}
+                            onPlayToggle={() => handlePlayToggle(track.trackId)}
+                        />
+                        <h2>{track.trackName}</h2>
+                    </li>
+                ))}
+                </ul>
+            </div>
           </div>
     )
 }
-
 export default AlbumPage;

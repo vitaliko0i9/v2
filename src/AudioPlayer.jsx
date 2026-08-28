@@ -1,25 +1,25 @@
-import { useRef, useState } from "react"
+import { useRef, useEffect } from "react";
 
-const AudioPlayer = ({src}) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+
+const AudioPlayer = ({ src, isPlaying, onPlayToggle }) => {
   const audioRef = useRef(null);
-  
-  const togglePlay = () => {
+
+  useEffect(() => {
     if (isPlaying) {
-        audioRef.current.pause();
+      audioRef.current.play().catch((err) => console.log("Помилка відтворення:", err));
+    } else {
+      audioRef.current.pause();
     }
-    else {
-    audioRef.current.play();
-  }
-  setIsPlaying(!isPlaying);
-};
+  }, [isPlaying]);
 
   return (
     <div className="track-text">
-        <audio ref={audioRef} src={src}></audio>
-        <button className="play-btn" onClick={togglePlay}>{isPlaying ? '⏸' : '▶'}</button>
+      <audio ref={audioRef} src={src}></audio>
+      <button className="play-btn" onClick={onPlayToggle}>
+        {isPlaying ? '⏸' : '▶'}
+      </button>
     </div>
   );
-} 
+};
 
 export default AudioPlayer;
