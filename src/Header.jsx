@@ -2,7 +2,10 @@
 function Header() {
     return(
 
-        <div></div>
+        <div>
+            <nav>
+            </nav>
+        </div>
     )
 }
 
