@@ -3,12 +3,7 @@ import { Link } from "react-router-dom"
 function Header() {
     return(
         <div>
-            {/* <nav class="nav nav-pills nav-fill">
-                <Link to="NewPAge" class="nav-item nav-link active" >Active</Link>
-                <a class="nav-item nav-link" href="#">Link</a>
-                <a class="nav-item nav-link" href="#">Link</a>
-                <a class="nav-item nav-link disabled" href="#">Disabled</a>
-            </nav> */}
+            {/* style this part*/}
            <section className="hero"> 
                 <header className="header">
                     <div className="header__container">

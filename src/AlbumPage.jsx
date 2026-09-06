@@ -76,7 +76,7 @@ function AlbumPage() {
                         ))}
                     </ul>
                 </div>
-            </div>
+            </div>{/* style this part */}
                 <aside className={ActiveLyrics ? "open" : "close"}>
                         {ActiveLyrics && (
                             <>
