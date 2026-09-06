@@ -9,11 +9,11 @@ function AlbumPage() {
     const { id } = useParams();
     const [ albums, setAlbums] = useState(null);
     const [ tracks, setTracks] = useState([]);
-
+    const [ ActiveLyrics, setActiveLyrics ] = useState(null);
     const [currentTrackId, setCurrentTrackId] = useState(null);
 
     const handlePlayToggle = (trackId) => {
-    setCurrentTrackId(prev => (prev === trackId ? null : trackId));
+        setCurrentTrackId(prev => (prev === trackId ? null : trackId));
     };
 
     useEffect(() => {
@@ -50,31 +50,43 @@ function AlbumPage() {
     }
 
     return(
-        <div className="album-page-wrapper">
-            <div className="album-preview">
-                <img
-                    src={albums.artworkUrl100.replace("100x100", "300x300")}
-                    alt={albums.collectionName}
-                    />
-                <h1>{albums.collectionName}</h1>
-                <h2>{albums.artistName}</h2>
+        <div>
+            <div className="album-page-wrapper">
+                <div className="album-preview">
+                    <img
+                        src={albums.artworkUrl100.replace("100x100", "300x300")}
+                        alt={albums.collectionName}
+                        />
+                    <h1>{albums.collectionName}</h1>
+                    <h2>{albums.artistName}</h2>
+                </div>
+                <div className="track-info">
+                    <ul style={{ gridTemplateRows: `repeat(${Math.ceil(tracks.length / 2)}, 1fr)` }}>
+                        {tracks.map((track) => (
+                            <li>
+                                <AudioPlayer
+                                    // id={track.trackId}
+                                    src={track.previewUrl}
+                                    isPlaying={currentTrackId === track.trackId}
+                                    onPlayToggle={() => handlePlayToggle(track.trackId)}
+                                />
+                                    <h2>{track.trackName}</h2>
+                                    <button onClick={() => setActiveLyrics(track)} >☰</button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
-            <div className="track-info">
-                <ul style={{ gridTemplateRows: `repeat(${Math.ceil(tracks.length / 2)}, 1fr)` }}>
-                    {tracks.map((track) => (
-                        <li>
-                            <AudioPlayer
-                                // id={track.trackId}
-                                src={track.previewUrl}
-                                isPlaying={currentTrackId === track.trackId}
-                                onPlayToggle={() => handlePlayToggle(track.trackId)}
-                            />
-                            <h2>{track.trackName}</h2>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-          </div>
+                <aside className={ActiveLyrics ? "open" : "close"}>
+                        {ActiveLyrics && (
+                            <>
+                            {/* <h3>{activeTrack.trackName}</h3>
+                            <p>{activeTrack.lyrics}</p> */}
+                            <button onClick={() => setActiveLyrics(null)}>Закрити</button>
+                            </>
+                        )}
+                </aside>
+        </div>
     )
 }
 export default AlbumPage;
