@@ -13,7 +13,7 @@ function Header() {
                                     <Link to="NewPage" className="header__list-link active">Home</Link>
                                 </li>
                                 <li className="header__list-item">
-                                    <Link to="index.html" className="header__list-link">1</Link>
+                                    <Link to="try" className="header__list-link">1</Link>
                                 </li>
                                 <li className="header__list-item">
                                     <Link to="index.html" className="header__list-link">2</Link>

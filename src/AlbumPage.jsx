@@ -11,6 +11,7 @@ function AlbumPage() {
     const [ tracks, setTracks] = useState([]);
     const [ ActiveLyrics, setActiveLyrics ] = useState(null);
     const [currentTrackId, setCurrentTrackId] = useState(null);
+    const [lyrics, setLyrics] = useState([]);
 
     const handlePlayToggle = (trackId) => {
         setCurrentTrackId(prev => (prev === trackId ? null : trackId));
@@ -48,6 +49,23 @@ function AlbumPage() {
     if(!albums){
         return <h1>Album not found</h1>
     }
+
+    async function fetchLyrics(artist, title) {
+    const params = new URLSearchParams({ artist, title });
+    const response = await fetch(`http://127.0.0.1:8000/lyrics?${params}`);
+    const data = await response.json();
+
+    if (data.success) {
+        console.log(data.lyrics);
+        return data.lyrics;
+    } else {
+        console.log("Текст не знайдено");
+        return null;
+    }
+    }
+
+    // Використання:
+    fetchLyrics("Drake", "One Dance");
 
     return(
         <div>
