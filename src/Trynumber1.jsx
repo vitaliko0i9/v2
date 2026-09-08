@@ -1,33 +1,12 @@
-import { useState, useEffect } from "react";
+import useLyrics from './FindLyrics'
 
-function LyricsPage() {
-  const [lyrics, setLyrics] = useState(null);
-  const [loading, setLoading] = useState(false);
+function TrackLyrics({ artist, title }) {
+  const { lyrics, loading, error } = useLyrics(artist, title);
 
-  const handleSearch = async (artist, title) => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams({ artist, title });
-      const res = await fetch(`http://127.0.0.1:8000/lyrics?${params}`);
-      const data = await res.json();
-      setLyrics(data.success ? data.lyrics : "Текст не знайдено");
-    } catch (err) {
-      console.error("Помилка запиту:", err);
-      setLyrics("Помилка завантаження");
-    } finally {
-      setLoading(false);
-    }
-  };
+  if (loading) return <p>Завантаження тексту...</p>;
+  if (error) return <p>Помилка: {error}</p>;
+  if (!lyrics) return null;
 
-  return (
-    <div>
-      <button onClick={() => handleSearch("Drake", "One dance")}>
-        Знайти текст
-      </button>
-      {loading && <p>Завантаження...</p>}
-      {lyrics && <pre>{lyrics}</pre>}
-    </div>
-  );
+  return <pre>{lyrics.lyrics}</pre>;
 }
-
-export default LyricsPage;
+export default TrackLyrics;

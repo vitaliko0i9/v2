@@ -2,7 +2,7 @@ import { data, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AudioPlayer from "./AudioPlayer";
-
+import Trynumber1 from "./Trynumber1";
 
 function AlbumPage() {
 
@@ -49,24 +49,6 @@ function AlbumPage() {
     if(!albums){
         return <h1>Album not found</h1>
     }
-
-    async function fetchLyrics(artist, title) {
-    const params = new URLSearchParams({ artist, title });
-    const response = await fetch(`http://127.0.0.1:8000/lyrics?${params}`);
-    const data = await response.json();
-
-    if (data.success) {
-        console.log(data.lyrics);
-        return data.lyrics;
-    } else {
-        console.log("Текст не знайдено");
-        return null;
-    }
-    }
-
-    // Використання:
-    fetchLyrics("Drake", "One Dance");
-
     return(
         <div>
             <div className="album-page-wrapper">
@@ -89,7 +71,7 @@ function AlbumPage() {
                                     onPlayToggle={() => handlePlayToggle(track.trackId)}
                                 />
                                     <h2>{track.trackName}</h2>
-                                    <button onClick={() => setActiveLyrics(track)} >☰</button>
+                                    <button onClick={() => setActiveLyrics(track)} >☰</button> 
                             </li>
                         ))}
                     </ul>
@@ -98,9 +80,9 @@ function AlbumPage() {
                 <aside className={ActiveLyrics ? "open" : "close"}>
                         {ActiveLyrics && (
                             <>
-                            {/* <h3>{activeTrack.trackName}</h3>
-                            <p>{activeTrack.lyrics}</p> */}
                             <button onClick={() => setActiveLyrics(null)}>Закрити</button>
+                            <h3>{ActiveLyrics.trackName}</h3>
+                             <Trynumber1 artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} />
                             </>
                         )}
                 </aside>
