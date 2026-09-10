@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AudioPlayer from "./AudioPlayer";
 import Trynumber1 from "./Trynumber1";
+import SongAnnotations from "./FindMeanings";
 
 function AlbumPage() {
 
@@ -11,7 +12,6 @@ function AlbumPage() {
     const [ tracks, setTracks] = useState([]);
     const [ ActiveLyrics, setActiveLyrics ] = useState(null);
     const [currentTrackId, setCurrentTrackId] = useState(null);
-    const [lyrics, setLyrics] = useState([]);
 
     const handlePlayToggle = (trackId) => {
         setCurrentTrackId(prev => (prev === trackId ? null : trackId));
@@ -49,6 +49,7 @@ function AlbumPage() {
     if(!albums){
         return <h1>Album not found</h1>
     }
+    
     return(
         <div>
             <div className="album-page-wrapper">
