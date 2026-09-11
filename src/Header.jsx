@@ -16,7 +16,7 @@ function Header() {
                                     <Link to="try" className="header__list-link">1</Link>
                                 </li>
                                 <li className="header__list-item">
-                                    <Link to="index.html" className="header__list-link">2</Link>
+                                    <Link to="Meanings" className="header__list-link">2</Link>
                                 </li>
                                 <li className="header__list-item">
                                     <Link to="index.html" className="header__list-link">3</Link>

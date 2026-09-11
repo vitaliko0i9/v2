@@ -5,6 +5,7 @@ import { BrowserRouter, Routes , Route } from 'react-router-dom';
 import AlbumPage from './AlbumPage.jsx'
 import NewPage from './NewPage.jsx';
 import Trynumber1 from "./Trynumber1.jsx"
+import Meanings from './Meanings.jsx';
 
 function Home() {
   return(
@@ -24,6 +25,7 @@ function App() {
           <Route path='/album/:id' element={<AlbumPage />}/>
           <Route path='/NewPage' element={<NewPage />}></Route>
           <Route path='/try' element={<Trynumber1 />}></Route>
+          <Route path='/Meanings' element={<Meanings />}></Route>
         </Routes>
       </BrowserRouter>
   );

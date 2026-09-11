@@ -1,11 +1,9 @@
 import lyricsgenius
-genius = lyricsgenius.Genius('QSvSobkbWxo5cMEjs2kTLH2dwrMRMkiu92631cxoaYoA-D3gGrhsqqF8m3fUXLTZ') # you can also set the attribute here
-genius.response_format = 'plain,html'
+genius = lyricsgenius.Genius("QSvSobkbWxo5cMEjs2kTLH2dwrMRMkiu92631cxoaYoA-D3gGrhsqqF8m3fUXLTZ")
 
-res = genius.annotation(10225840)
+request = genius.referents(song_id=235729,
+                           per_page=50)
+verified = [y for x in request['referents']
+            for y in x['annotations'] if y['verified']]
 
-# Annotation in plain formatting
-print(res['annotation']['body']['plain'])
-
-# Annotation in html formatting
-print(res['annotation']['body']['html'])
+print(verified)
