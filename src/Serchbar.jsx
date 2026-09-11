@@ -7,10 +7,6 @@ const SearchBar = () => {
     const [artists, setArtists] = useState([])
     const [search, setSearch] =useState('')
     
-    const spanClick = () => {
-        
-    };
-
     const getArtists = (artists) => {
 
         if (!search || search.trim().length < 1) return;
