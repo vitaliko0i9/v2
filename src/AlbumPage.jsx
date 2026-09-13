@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AudioPlayer from "./AudioPlayer";
 import Trynumber1 from "./Trynumber1";
-import SongAnnotations from "./FindMeanings";
-import DataFetcher from "./Meanings";
+import UseSong from "./Meanings";
 
 function AlbumPage() {
 
@@ -84,11 +83,16 @@ function AlbumPage() {
                         {ActiveLyrics && (
                             <>
                             <button onClick={() => setActiveLyrics(null)}>Закрити</button>
-                            {/* <h3>{ActiveLyrics.trackName}</h3> */}
-                             {/* <Trynumber1 artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} /> */}
-                             <DataFetcher artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} />
+                            <UseSong artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} view="lyrics"/>
                             </>
                         )}
+                </aside>
+                <aside className={`aside-right ${ActiveLyrics ? "open" : "disactive"}`}>
+                        {ActiveLyrics && (
+                            <>
+                            <UseSong artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} view="annotations" />
+                            </>
+                        )}  
                 </aside>
         </div>
     )

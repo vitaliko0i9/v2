@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 
 
-function DataFetcher({artist, title}) {
+function UseSong({artist, title, view}) {
   // 1. Declare state variables for data, loading, and error states
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -44,8 +44,8 @@ function DataFetcher({artist, title}) {
   // 4. Render the data using map()
   return (
     <div>
-      <h2>Song: </h2>
-      <pre>{data.lyrics}</pre>
+      {view === "lyrics" && <pre>{data.lyrics}</pre>}
+      {view === "annotations" && (
       <ul>
         {data.annotations.map((item, index) => (
           <li key={index}>
@@ -54,8 +54,9 @@ function DataFetcher({artist, title}) {
         </li>
         ))}
       </ul>
+      )}
     </div>
   );
 }
 
-export default DataFetcher;
+export default UseSong;
