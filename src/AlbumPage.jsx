@@ -4,6 +4,7 @@ import axios from "axios";
 import AudioPlayer from "./AudioPlayer";
 import Trynumber1 from "./Trynumber1";
 import SongAnnotations from "./FindMeanings";
+import DataFetcher from "./Meanings";
 
 function AlbumPage() {
 
@@ -12,6 +13,7 @@ function AlbumPage() {
     const [ tracks, setTracks] = useState([]);
     const [ ActiveLyrics, setActiveLyrics ] = useState(null);
     const [currentTrackId, setCurrentTrackId] = useState(null);
+    const [ selected, setSelected ] = useState(null);
 
     const handlePlayToggle = (trackId) => {
         setCurrentTrackId(prev => (prev === trackId ? null : trackId));
@@ -78,12 +80,13 @@ function AlbumPage() {
                     </ul>
                 </div>
             </div>{/* style this part */}
-                <aside className={ActiveLyrics ? "open" : "close"}>
+                <aside className={`aside-left ${ActiveLyrics ? "open" : "close"}`}>
                         {ActiveLyrics && (
                             <>
                             <button onClick={() => setActiveLyrics(null)}>Закрити</button>
-                            <h3>{ActiveLyrics.trackName}</h3>
-                             <Trynumber1 artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} />
+                            {/* <h3>{ActiveLyrics.trackName}</h3> */}
+                             {/* <Trynumber1 artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} /> */}
+                             <DataFetcher artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} />
                             </>
                         )}
                 </aside>

@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-function DataFetcher() {
+
+
+function DataFetcher({artist, title}) {
   // 1. Declare state variables for data, loading, and error states
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +13,7 @@ function DataFetcher() {
     const fetchData = async () => {
       try {
         // Make the API request
-        const response = await fetch('https://typicode.com');
+        const response = await fetch(`http://127.0.0.1:8000/lyrics?artist=${artist}&title=${title}`);
         
         // Check if the response is successful (status 200-299)
         if (!response.ok) {
@@ -33,7 +35,7 @@ function DataFetcher() {
     };
 
     fetchData();
-  }, []); // Empty dependency array means this runs exactly once on mount
+  }, [artist, title]); // Empty dependency array means this runs exactly once on mount
 
   // 3. Conditional rendering based on states
   if (loading) return <p>Loading data...</p>;
@@ -42,10 +44,14 @@ function DataFetcher() {
   // 4. Render the data using map()
   return (
     <div>
-      <h2>User List</h2>
+      <h2>Song: </h2>
+      <pre>{data.lyrics}</pre>
       <ul>
-        {data.map(user => (
-          <li key={user.id}>{user.name} ({user.email})</li>
+        {data.annotations.map((item, index) => (
+          <li key={index}>
+            <p>{item.fragment}</p>
+            <p>{item.explanation}</p>
+        </li>
         ))}
       </ul>
     </div>

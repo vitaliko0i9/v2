@@ -17,6 +17,7 @@ function Header() {
                                 </li>
                                 <li className="header__list-item">
                                     <Link to="Meanings" className="header__list-link">2</Link>
+                                    {/* <DataFetcher artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} /> */}
                                 </li>
                                 <li className="header__list-item">
                                     <Link to="index.html" className="header__list-link">3</Link>
