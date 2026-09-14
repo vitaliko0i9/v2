@@ -391,3 +391,6 @@ aside.close {
 aside.disactive {
   transform: translateX(100%);
 }
+.highlighted {
+  background-color: yellow;
+}

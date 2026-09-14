@@ -12,7 +12,7 @@ function AlbumPage() {
     const [ tracks, setTracks] = useState([]);
     const [ ActiveLyrics, setActiveLyrics ] = useState(null);
     const [currentTrackId, setCurrentTrackId] = useState(null);
-    const [ selected, setSelected ] = useState(null);
+    const [ activeIndex, setActiveIndex ] = useState(null);
 
     const handlePlayToggle = (trackId) => {
         setCurrentTrackId(prev => (prev === trackId ? null : trackId));
@@ -83,14 +83,14 @@ function AlbumPage() {
                         {ActiveLyrics && (
                             <>
                             <button onClick={() => setActiveLyrics(null)}>Закрити</button>
-                            <UseSong artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} view="lyrics"/>
+                            <UseSong artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} onOpenAnnotation={setActiveIndex}/>
                             </>
                         )}
                 </aside>
-                <aside className={`aside-right ${ActiveLyrics ? "open" : "disactive"}`}>
-                        {ActiveLyrics && (
+                <aside className={`aside-right ${activeIndex ? "open" : "disactive"}`}>
+                        {activeIndex && (
                             <>
-                            <UseSong artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} view="annotations" />
+                            <UseSong explanataion={activeIndex.explanataion}/>
                             </>
                         )}  
                 </aside>

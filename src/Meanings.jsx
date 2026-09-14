@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 
 
 
-function UseSong({artist, title, view}) {
+function UseSong({artist, title, onOpenAnnotation}) {
   // 1. Declare state variables for data, loading, and error states
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  
 
   // 2. Use useEffect to run the fetch operation when the component mounts
   useEffect(() => {
@@ -44,17 +46,18 @@ function UseSong({artist, title, view}) {
   // 4. Render the data using map()
   return (
     <div>
-      {view === "lyrics" && <pre>{data.lyrics}</pre>}
-      {view === "annotations" && (
-      <ul>
-        {data.annotations.map((item, index) => (
-          <li key={index}>
-            <p>{item.fragment}</p>
-            <p>{item.explanation}</p>
-        </li>
-        ))}
-      </ul>
-      )}
+      {data.lyrics.split("\n").map((line, index) => {
+        const annotation = data.annotations.find(item => item.fragment.includes(line));
+        return (
+          <p 
+          className={annotation ? "highlighted" : "notHighlighted"}
+          key={index}
+          onClick={() => annotation && onOpenAnnotation(annotation)}
+          >
+            {line}
+          </p>
+        );
+      })}
     </div>
   );
 }
