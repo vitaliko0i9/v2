@@ -43,6 +43,8 @@ function UseSong({artist, title, onOpenAnnotation}) {
   if (loading) return <p>Loading data...</p>;
   if (error) return <p>Error: {error}</p>;
 
+
+  
   // 4. Render the data using map()
   return (
     <div>
@@ -50,6 +52,7 @@ function UseSong({artist, title, onOpenAnnotation}) {
         const annotation = data.annotations.find(item => item.fragment.includes(line));
         return (
           <p 
+          style={{cursor: "pointer"}}
           className={annotation ? "highlighted" : "notHighlighted"}
           key={index}
           onClick={() => annotation && onOpenAnnotation(annotation)}

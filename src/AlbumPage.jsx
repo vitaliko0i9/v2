@@ -88,11 +88,7 @@ function AlbumPage() {
                         )}
                 </aside>
                 <aside className={`aside-right ${activeIndex ? "open" : "disactive"}`}>
-                        {activeIndex && (
-                            <>
-                            <UseSong explanataion={activeIndex.explanataion}/>
-                            </>
-                        )}  
+                    {activeIndex && <p>{activeIndex.explanation}</p>}
                 </aside>
         </div>
     )

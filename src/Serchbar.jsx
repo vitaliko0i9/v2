@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import AudioPlayer from './AudioPlayer';
+import { AlbumPage } from './AlbumPage';
 
 
 const SearchBar = () => {
@@ -51,6 +52,7 @@ const SearchBar = () => {
                             <div className="track-text">
                                 <span className="track-name">{artist.trackName}</span>
                                 <span className="artist-name">{artist.artistName}</span>
+                                <button onClick={() => setActiveLyrics(track)} >☰</button> 
                             </div>
                         <AudioPlayer src={artist.previewUrl} />
                     </li>
