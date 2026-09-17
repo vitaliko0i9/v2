@@ -100,7 +100,7 @@ html {
   width: min(320px, 85vw);
   max-height: 0;
   opacity: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
   transform: translateY(-6px);
   pointer-events: none;
   background: rgba(20, 20, 20, 0.82);
@@ -116,7 +116,7 @@ html {
 
 .Searchbar:focus-within + .ResultChild,
 .Searchbar:has(.search-input:not(:placeholder-shown)) + .ResultChild {
-  max-height: 280px;
+  max-height: 580px;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -135,7 +135,7 @@ html {
   gap: 8px;
   padding: 6px 10px;
   transition: background-color 0.2s ease;
-}
+} 
 
 .ResultChild li:hover {
   background-color: rgba(255, 255, 255, 0.06);
@@ -154,7 +154,7 @@ html {
   flex-direction: column;
   min-width: 0;
   flex: 1;
-}
+} 
 
 .track-info strong {
   color: white;
@@ -169,7 +169,7 @@ html {
   color: #aaa;
   font-size: 11px;
   white-space: nowrap;
-  overflow: hidden;
+    overflow: hidden;
   text-overflow: ellipsis;
 } 
 

@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AudioPlayer from "./AudioPlayer";
+import UseSong from "./Meanings";
 
 function FindMusic() {
     const [name, setName] = useState('')
     const [music, setMusic] = useState([])
-
+    const [ ActiveLyrics, setActiveLyrics ] = useState(null);
     const [currentTrackId, setCurrentTrackId] = useState(null);
+    const [ activeIndex, setActiveIndex ] = useState(null);
 
     const handlePlayToggle = (trackId) => {
     setCurrentTrackId(prev => (prev === trackId ? null : trackId));
@@ -59,9 +61,21 @@ function FindMusic() {
                         isPlaying={currentTrackId === track.trackId}
                         onPlayToggle={() => handlePlayToggle(track.trackId)}
                         />
+                        <button onClick={() => setActiveLyrics(track)} >☰</button>
                     </li>
                 ))}
             </ul>
+            <aside className={`aside-left ${ActiveLyrics ? "open" : "close"}`}>
+                        {ActiveLyrics && (
+                            <>
+                            <button onClick={() => setActiveLyrics(null)}>Закрити</button>
+                            <UseSong artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} onOpenAnnotation={setActiveIndex}/>
+                            </>
+                        )}
+                </aside>
+                <aside className={`aside-right ${activeIndex ? "open" : "disactive"}`}>
+                    {activeIndex && <p>{activeIndex.explanation}</p>}
+                </aside>
         </div>
     </div>
     )

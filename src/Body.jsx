@@ -1,3 +1,4 @@
+
 import FindMusic from "./FindMusic";
 
 function Body() {
@@ -7,7 +8,7 @@ function Body() {
           <h1>MUSIC</h1>
         </section>
         <section className="search-section">
-          <FindMusic/>
+          <FindMusic />
       </section>
       <section className="all_h2">
         <h2 /> Музика бере свій початок з...
