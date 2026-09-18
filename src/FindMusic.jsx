@@ -46,8 +46,8 @@ function FindMusic() {
                 </div>
             </form> 
             <div className="ResultChild">
-            <ul>
-                {music.slice(0, 5).map((track) => (
+            <ul> {/* style this part */}
+                {(ActiveLyrics ? [ActiveLyrics] : music.slice(0, 5)).map((track) => (
                     <li key={track.trackId}>
                         <img src={track.artworkUrl100}
                         className="track-image"
@@ -65,17 +65,26 @@ function FindMusic() {
                     </li>
                 ))}
             </ul>
-            <aside className={`aside-left ${ActiveLyrics ? "open" : "close"}`}>
+            
+            <div className={`from-down ${ActiveLyrics ? "open" : "close"}`}>
                         {ActiveLyrics && (
                             <>
-                            <button onClick={() => setActiveLyrics(null)}>Закрити</button>
-                            <UseSong artist={ActiveLyrics.artistName} title={ActiveLyrics.trackName} onOpenAnnotation={setActiveIndex}/>
-                            </>
-                        )}
-                </aside>
-                <aside className={`aside-right ${activeIndex ? "open" : "disactive"}`}>
-                    {activeIndex && <p>{activeIndex.explanation}</p>}
-                </aside>
+                            <button 
+                            onClick={() => setActiveLyrics(null)}
+                            >
+                                Закрити
+                            </button>
+                            <UseSong 
+                            artist={ActiveLyrics.artistName} 
+                            title={ActiveLyrics.trackName} 
+                                onOpenAnnotation={setActiveIndex}
+                                />
+                                </>
+                            )}
+                    </div>
+                    {/* <form className={`aside-right ${activeIndex ? "open" : "disactive"}`}>
+                        {activeIndex && <p>{activeIndex.explanation}</p>}
+                    </form> */}
         </div>
     </div>
     )
