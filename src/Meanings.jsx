@@ -8,8 +8,6 @@ function UseSong({artist, title, onOpenAnnotation}) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  
-
   // 2. Use useEffect to run the fetch operation when the component mounts
   useEffect(() => {
     const fetchData = async () => {

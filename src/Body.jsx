@@ -1,5 +1,6 @@
 
 import FindMusic from "./FindMusic";
+import UseYoutubeAPI from "./NewPage";
 
 function Body() {
   return(
@@ -13,7 +14,6 @@ function Body() {
       <section className="all_h2">
         <h2 /> Музика бере свій початок з...
       </section>
-
     </div>
   );
 }

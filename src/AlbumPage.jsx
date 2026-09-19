@@ -4,6 +4,7 @@ import axios from "axios";
 import AudioPlayer from "./AudioPlayer";
 import Trynumber1 from "./Trynumber1";
 import UseSong from "./Meanings";
+import useYoutubeAPI from "./NewPage";
 
 function AlbumPage() {
 
@@ -13,6 +14,7 @@ function AlbumPage() {
     const [ ActiveLyrics, setActiveLyrics ] = useState(null);
     const [currentTrackId, setCurrentTrackId] = useState(null);
     const [ activeIndex, setActiveIndex ] = useState(null);
+    const { videoId, getMusic } = useYoutubeAPI();
 
     const handlePlayToggle = (trackId) => {
         setCurrentTrackId(prev => (prev === trackId ? null : trackId));
@@ -73,7 +75,8 @@ function AlbumPage() {
                                     onPlayToggle={() => handlePlayToggle(track.trackId)}
                                 />
                                     <h2>{track.trackName}</h2>
-                                    <button onClick={() => setActiveLyrics(track)} >☰</button> 
+                                    <button onClick={() => setActiveLyrics(track)} >☰</button>
+                                    <button onClick={() => getMusic(track.artistName, track.trackName)}>▶</button> 
                             </li>
                         ))}
                     </ul>
@@ -93,4 +96,5 @@ function AlbumPage() {
         </div>
     )
 }
+
 export default AlbumPage;

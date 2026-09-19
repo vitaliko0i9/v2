@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AudioPlayer from "./AudioPlayer";
 import UseSong from "./Meanings";
+import useYoutubeAPI from "./NewPage";
 
 function FindMusic() {
     const [name, setName] = useState('')
@@ -9,26 +10,27 @@ function FindMusic() {
     const [ ActiveLyrics, setActiveLyrics ] = useState(null);
     const [currentTrackId, setCurrentTrackId] = useState(null);
     const [ activeIndex, setActiveIndex ] = useState(null);
+    const { videoId, getMusic } = useYoutubeAPI();
 
     const handlePlayToggle = (trackId) => {
     setCurrentTrackId(prev => (prev === trackId ? null : trackId));
     };
 
-    const getMusic = (e) => {
-        axios.get(`https://itunes.apple.com/search?term=${name}&entity=song&origin=*`)
-        .then((response) => {
-            setMusic(response.data.results);
-            console.log(response.data.results[0]);
-            console.log(music)
-        });
-    }
+    // const getMusic = (e) => {
+    //     axios.get(`https://itunes.apple.com/search?term=${name}&entity=song&origin=*`)
+    //     .then((response) => {
+    //         setMusic(response.data.results);
+    //         console.log(response.data.results[0]);
+    //         console.log(music)
+    //     });
+    // }
 
-    useEffect(() => {
-        const debounce = setTimeout(() => {
-            getMusic();
-    }, 500); 
-        return () => clearTimeout(debounce);
-    }, [name]);
+    // useEffect(() => {
+    //     const debounce = setTimeout(() => {
+    //         getMusic();
+    // }, 500); 
+    //     return () => clearTimeout(debounce);
+    // }, [name]);
     
     return(
         <div>
@@ -62,6 +64,7 @@ function FindMusic() {
                         onPlayToggle={() => handlePlayToggle(track.trackId)}
                         />
                         <button onClick={() => setActiveLyrics(track)} >☰</button>
+                        <button onClick={() => getMusic(track.artistName, track.trackName)}>▶</button>
                     </li>
                 ))}
             </ul>
