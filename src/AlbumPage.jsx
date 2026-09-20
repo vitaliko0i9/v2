@@ -22,7 +22,6 @@ function AlbumPage() {
 
     useEffect(() => {
         const getTracks = async () => {
-
             try {
                 const response = await axios.get(
                     `https://itunes.apple.com/lookup?id=${id}&entity=song`
@@ -69,7 +68,6 @@ function AlbumPage() {
                         {tracks.map((track) => (
                             <li>
                                 <AudioPlayer
-                                    // id={track.trackId}
                                     src={track.previewUrl}
                                     isPlaying={currentTrackId === track.trackId}
                                     onPlayToggle={() => handlePlayToggle(track.trackId)}
