@@ -1,7 +1,11 @@
+import { useContext, createContext, useRef } from "react";
 import { useYoutubePlayer } from "./YoutubePlayerContext";
 import useYoutubeAPI from "../../backend/useYoutubeAPI";
 
-const AudioPlayer = ({ artist, title, trackId }) => {
+
+const contextBar = createContext(null);
+
+const AudioPlayer = () => {
     const { 
         playVideo, 
         pauseVideo, 
@@ -12,8 +16,9 @@ const AudioPlayer = ({ artist, title, trackId }) => {
         setPausedTrackId 
     } = useYoutubePlayer();
 
-    const { getMusic } = useYoutubeAPI();
-
+export function PlayingBar({children}) {
+    const barPlayer = useRef(null);
+    const {playMusic} = useYoutubeAPI();
     const isPlaying = currentTrackId === trackId;
 
     const handleClick = async () => {
@@ -35,13 +40,14 @@ const AudioPlayer = ({ artist, title, trackId }) => {
         }
     };
 
-    return (
-        <div className="track-text">
-            <button className="play-btn" onClick={handleClick}>
-                {isPlaying ? '⏸' : '▶'}
-            </button>
-        </div>
-    );
-};
+    return(
+        <div>
 
-export default AudioPlayer;
+        </div>
+    )
+
+}
+
+export function useYoutubePlayer() {
+    return useContext(contextBar);
+}

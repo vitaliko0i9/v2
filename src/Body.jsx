@@ -10,7 +10,6 @@ function Body() {
         </section>
         <section className="search-section">
           <FindMusic />
-          <div id="youtube-player" style={{display: "none"}}></div>
       </section>
       <section className="all_h2">
         <h2 /> Музика бере свій початок з...

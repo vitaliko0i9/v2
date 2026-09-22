@@ -4,20 +4,13 @@ import axios from "axios";
 import AudioPlayer from "./AudioPlayer";
 import Trynumber1 from "./Trynumber1";
 import UseSong from "./Meanings";
-import useYoutubeAPI from "./useYoutubeAPI";
-import { useYoutubePlayer } from "./YoutubePlayerContext";
 
 function AlbumPage() {
-
     const { id } = useParams();
     const [ albums, setAlbums] = useState(null);
     const [ tracks, setTracks] = useState([]);
     const [ ActiveLyrics, setActiveLyrics ] = useState(null);
-    const [currentTrackId, setCurrentTrackId] = useState(null);
     const [ activeIndex, setActiveIndex ] = useState(null);
-    const { videoId, getMusic } = useYoutubeAPI();
-    const { playVideo, pauseVideo } = useYoutubePlayer();
-    const [ pausedTrackId, setPausedTrackId ] = useState(null);
 
     useEffect(() => {
         const getTracks = async () => {

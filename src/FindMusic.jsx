@@ -1,9 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import AudioPlayer from "./AudioPlayer";
 import UseSong from "./Meanings";
-import useYoutubePlayer from "./useYoutubePlayer";
-import useYoutubeAPI from "./useYoutubeAPI";
 
 function FindMusic() {
     const [name, setName] = useState('')
@@ -11,30 +8,7 @@ function FindMusic() {
     const [ ActiveLyrics, setActiveLyrics ] = useState(null);
     const [currentTrackId, setCurrentTrackId] = useState(null);
     const [ activeIndex, setActiveIndex ] = useState(null);
-    const { playVideo, pauseVideo } = useYoutubePlayer();
-    const { videoId, setVideoId } = useYoutubeAPI();
 
-
-    const handlePlayToggle = (trackId) => {
-    setCurrentTrackId(prev => (prev === trackId ? null : trackId));
-    };
-
-    // const getMusic = (e) => {
-    //     axios.get(`https://itunes.apple.com/search?term=${name}&entity=song&origin=*`)
-    //     .then((response) => {
-    //         setMusic(response.data.results);
-    //         console.log(response.data.results[0]);
-    //         console.log(music)
-    //     });
-    // }
-
-    // useEffect(() => {
-    //     const debounce = setTimeout(() => {
-    //         getMusic();
-    // }, 500); 
-    //     return () => clearTimeout(debounce);
-    // }, [name]);
-    
     return(
         <div>
             <form className="Searchbar">
@@ -61,15 +35,14 @@ function FindMusic() {
                         <strong>{track.trackName}</strong>
                         <span>{track.artistName}</span>
                         </div>
-                        <AudioPlayer
-                        src={track.previewUrl}
-                        isPlaying={currentTrackId === track.trackId}
-                        onPlayToggle={() => handlePlayToggle(track.trackId)}
+                        <AudioPlayer 
+                            artist={track.artistName} 
+                            title={track.trackName} 
+                            trackId={track.trackId} 
                         />
                     </li>
                 ))}
-            </ul>
-            
+            </ul>            
             <div className={`from-down ${ActiveLyrics ? "open" : "close"}`}>
                         {ActiveLyrics && (
                             <>
