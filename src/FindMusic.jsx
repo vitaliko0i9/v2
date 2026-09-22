@@ -2,7 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AudioPlayer from "./AudioPlayer";
 import UseSong from "./Meanings";
-import useYoutubeAPI from "./NewPage";
+import useYoutubePlayer from "./useYoutubePlayer";
+import useYoutubeAPI from "./useYoutubeAPI";
 
 function FindMusic() {
     const [name, setName] = useState('')
@@ -10,7 +11,9 @@ function FindMusic() {
     const [ ActiveLyrics, setActiveLyrics ] = useState(null);
     const [currentTrackId, setCurrentTrackId] = useState(null);
     const [ activeIndex, setActiveIndex ] = useState(null);
-    const { videoId, getMusic } = useYoutubeAPI();
+    const { playVideo, pauseVideo } = useYoutubePlayer();
+    const { videoId, setVideoId } = useYoutubeAPI();
+
 
     const handlePlayToggle = (trackId) => {
     setCurrentTrackId(prev => (prev === trackId ? null : trackId));
@@ -63,8 +66,6 @@ function FindMusic() {
                         isPlaying={currentTrackId === track.trackId}
                         onPlayToggle={() => handlePlayToggle(track.trackId)}
                         />
-                        <button onClick={() => setActiveLyrics(track)} >☰</button>
-                        <button onClick={() => getMusic(track.artistName, track.trackName)}>▶</button>
                     </li>
                 ))}
             </ul>

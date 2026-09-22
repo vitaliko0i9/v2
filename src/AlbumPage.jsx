@@ -4,7 +4,8 @@ import axios from "axios";
 import AudioPlayer from "./AudioPlayer";
 import Trynumber1 from "./Trynumber1";
 import UseSong from "./Meanings";
-import useYoutubeAPI from "./NewPage";
+import useYoutubeAPI from "./useYoutubeAPI";
+import { useYoutubePlayer } from "./YoutubePlayerContext";
 
 function AlbumPage() {
 
@@ -15,10 +16,8 @@ function AlbumPage() {
     const [currentTrackId, setCurrentTrackId] = useState(null);
     const [ activeIndex, setActiveIndex ] = useState(null);
     const { videoId, getMusic } = useYoutubeAPI();
-
-    const handlePlayToggle = (trackId) => {
-        setCurrentTrackId(prev => (prev === trackId ? null : trackId));
-    };
+    const { playVideo, pauseVideo } = useYoutubePlayer();
+    const [ pausedTrackId, setPausedTrackId ] = useState(null);
 
     useEffect(() => {
         const getTracks = async () => {
@@ -54,6 +53,7 @@ function AlbumPage() {
     
     return(
         <div>
+            <div id="youtube-player" style={{display: "none"}}></div>
             <div className="album-page-wrapper">
                 <div className="album-preview">
                     <img
@@ -67,14 +67,13 @@ function AlbumPage() {
                     <ul style={{ gridTemplateRows: `repeat(${Math.ceil(tracks.length / 2)}, 1fr)` }}>
                         {tracks.map((track) => (
                             <li>
-                                <AudioPlayer
-                                    src={track.previewUrl}
-                                    isPlaying={currentTrackId === track.trackId}
-                                    onPlayToggle={() => handlePlayToggle(track.trackId)}
+                                <AudioPlayer 
+                                    artist={track.artistName} 
+                                    title={track.trackName} 
+                                    trackId={track.trackId} 
                                 />
                                     <h2>{track.trackName}</h2>
                                     <button onClick={() => setActiveLyrics(track)} >☰</button>
-                                    <button onClick={() => getMusic(track.artistName, track.trackName)}>▶</button> 
                             </li>
                         ))}
                     </ul>

@@ -1,25 +1,47 @@
-import { useRef, useEffect, useState } from "react";
+import { useYoutubePlayer } from "./YoutubePlayerContext";
+import useYoutubeAPI from "./useYoutubeAPI";
 
+const AudioPlayer = ({ artist, title, trackId }) => {
+    const { 
+        playVideo, 
+        pauseVideo, 
+        resumeVideo, 
+        currentTrackId, 
+        setCurrentTrackId, 
+        pausedTrackId, 
+        setPausedTrackId 
+    } = useYoutubePlayer();
+    
+    const { getMusic } = useYoutubeAPI();
 
-const AudioPlayer = ({ src, isPlaying, onPlayToggle }) => {
-  const audioRef = useRef(null);
+    const isPlaying = currentTrackId === trackId;
 
-  useEffect(() => {
-    if (isPlaying) {
-      audioRef.current.play().catch((err) => console.log("Помилка відтворення:", err));
-    } else {
-      audioRef.current.pause();
-    }
-  }, [isPlaying]);
+    const handleClick = async () => {
+        if (currentTrackId === trackId) {
+            pauseVideo();
+            setPausedTrackId(trackId);
+            setCurrentTrackId(null);
+        } else if (pausedTrackId === trackId) {
+            resumeVideo();
+            setCurrentTrackId(trackId);
+            setPausedTrackId(null);
+        } else {
+            const id = await getMusic(artist, title);
+            if (id) {
+                playVideo(id);
+                setCurrentTrackId(trackId);
+                setPausedTrackId(null);
+            }
+        }
+    };
 
-  return (
-    <div className="track-text">
-      <audio ref={audioRef} src={src}></audio>
-      <button className="play-btn" onClick={onPlayToggle}>
-        {isPlaying ? '⏸' : '▶'}
-      </button>
-    </div>
-  );
+    return (
+        <div className="track-text">
+            <button className="play-btn" onClick={handleClick}>
+                {isPlaying ? '⏸' : '▶'}
+            </button>
+        </div>
+    );
 };
 
 export default AudioPlayer;
